@@ -1,5 +1,6 @@
 package net.allusive.allusiveco;
 
+import net.allusive.allusiveco.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,5 +12,6 @@ public class AllusiveCo implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
+		ModItems.registerModItems();
 	}
 }
