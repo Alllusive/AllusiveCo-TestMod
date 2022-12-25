@@ -16,7 +16,7 @@ public class ModBlocks {
 
 
     public static final Block BAKERS_OVEN = registerBlock("bakers_oven",
-            new Block(FabricBlockSettings.of(Material.STONE).strength(3f).requiresTool()), ModItemGroup.ALLUSIVECO);
+            new BakersOven(FabricBlockSettings.of(Material.STONE).strength(3f).requiresTool()), ModItemGroup.ALLUSIVECO);
 
 
 
