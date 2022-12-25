@@ -1,6 +1,7 @@
 package net.allusive.allusiveco.item;
 
 import net.allusive.allusiveco.AllusiveCo;
+import net.allusive.allusiveco.item.custom.PlainDonutItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
@@ -10,7 +11,7 @@ public class ModItems {
 
 
     public static final Item PLAIN_DONUT = registerItem("plain_donut",
-            new Item(new FabricItemSettings().group(ModItemGroup.ALLUSIVECO)));
+            new PlainDonutItem(new FabricItemSettings().group(ModItemGroup.ALLUSIVECO)));
 
 
 

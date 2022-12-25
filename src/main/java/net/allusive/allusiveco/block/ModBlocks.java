@@ -19,16 +19,7 @@ public class ModBlocks {
             new BakersOven(FabricBlockSettings.of(Material.STONE).strength(3f).requiresTool()), ModItemGroup.ALLUSIVECO);
 
 
-
-
-
-
-
-
-
-
-
-
+    
 
 
 
