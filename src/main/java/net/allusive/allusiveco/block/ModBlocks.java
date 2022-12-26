@@ -1,10 +1,12 @@
 package net.allusive.allusiveco.block;
 
 import net.allusive.allusiveco.AllusiveCo;
+import net.allusive.allusiveco.block.custom.StrawberryCropBlock;
 import net.allusive.allusiveco.item.ModItemGroup;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -19,9 +21,22 @@ public class ModBlocks {
             new BakersOven(FabricBlockSettings.of(Material.STONE).strength(3f).requiresTool()), ModItemGroup.ALLUSIVECO);
 
 
-    
+    public static final Block STRAWBERRY_CROP = registerBlockWithoutItem("strawberry_crop",
+            new StrawberryCropBlock(FabricBlockSettings.copy(Blocks.WHEAT)));
 
 
+
+
+
+
+
+
+
+
+
+    private static Block registerBlockWithoutItem(String name, Block block) {
+        return Registry.register(Registry.BLOCK, new Identifier(AllusiveCo.MOD_ID, name), block);
+    }
 
     private static Block registerBlock(String name, Block block, ItemGroup tab) {
         registerBlockItem(name, block, tab);

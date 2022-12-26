@@ -1,8 +1,11 @@
 {
   "item.allusiveco.plain_donut": "Plain Donut",
+  "item.allusiveco.strawberry_seeds": "Strawberry Seeds",
+  "item.allusiveco.strawberry": "Strawberry",
 
 
   "block.allusiveco.bakers_oven": "Bakers Oven",
+  "block.allusiveco.strawberry_crop": "Strawberry Crop",
 
 
   "itemGroup.allusiveco.allusiveco": "AllusiveCo"

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "allusiveco:block/strawberry_stage1"
+  }
+}

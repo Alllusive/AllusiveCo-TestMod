@@ -1,8 +1,12 @@
 package net.allusive.allusiveco.item;
 
 import net.allusive.allusiveco.AllusiveCo;
+import net.allusive.allusiveco.block.ModBlocks;
 import net.allusive.allusiveco.item.custom.PlainDonutItem;
+import net.allusive.allusiveco.item.custom.StrawberryItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.item.AliasedBlockItem;
+import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -11,7 +15,15 @@ public class ModItems {
 
 
     public static final Item PLAIN_DONUT = registerItem("plain_donut",
-            new PlainDonutItem(new FabricItemSettings().group(ModItemGroup.ALLUSIVECO)));
+            new PlainDonutItem(new FabricItemSettings().group(ModItemGroup.ALLUSIVECO).food(new FoodComponent.Builder().hunger(4).saturationModifier(4f).build())));
+
+
+    public static final Item STRAWBERRY_SEEDS = registerItem("strawberry_seeds",
+            new AliasedBlockItem(ModBlocks.STRAWBERRY_CROP,
+                    new FabricItemSettings().group(ModItemGroup.ALLUSIVECO)));
+
+    public static final Item STRAWBERRY = registerItem("strawberry",
+            new StrawberryItem(new FabricItemSettings().group(ModItemGroup.ALLUSIVECO).food(new FoodComponent.Builder().hunger(2).saturationModifier(4f).build())));
 
 
 
