@@ -25,8 +25,8 @@ public class ModItems {
     public static final Item STRAWBERRY = registerItem("strawberry",
             new StrawberryItem(new FabricItemSettings().group(ModItemGroup.ALLUSIVECO).food(new FoodComponent.Builder().hunger(2).saturationModifier(4f).build())));
 
-
-
+    public static final Item DOUGH = registerItem("dough",
+            new Item(new FabricItemSettings().group(ModItemGroup.ALLUSIVECO)));
 
 
 
