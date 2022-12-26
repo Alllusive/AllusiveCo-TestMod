@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "allusiveco:dough"
+    },
+    {
+      "item": "allusiveco:donut_cutter"
+    }
+  ],
+  "result": {
+    "item": "allusiveco:donut_dough"
+  }
+}

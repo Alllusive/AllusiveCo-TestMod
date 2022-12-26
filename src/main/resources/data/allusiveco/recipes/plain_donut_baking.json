@@ -1,0 +1,11 @@
+{
+  "type": "allusiveco:baking",
+  "ingredients": [
+    {
+      "item": "allusiveco:donut_dough"
+    }
+  ],
+  "output": {
+    "item": "allusiveco:plain_donut"
+  }
+}

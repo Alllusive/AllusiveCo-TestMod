@@ -1,6 +1,8 @@
 package net.allusive.allusiveco.block.entity;
 
-import net.allusive.allusiveco.item.ModItems;
+
+import net.allusive.allusiveco.block.BakersOven;
+import net.allusive.allusiveco.recipe.BakersOvenRecipe;
 import net.allusive.allusiveco.screen.BakersOvenScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -17,8 +19,11 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class BakersOvenBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
 
@@ -26,7 +31,7 @@ public class BakersOvenBlockEntity extends BlockEntity implements NamedScreenHan
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
-    private int maxProgress = 72;
+    private int maxProgress = 4000;
 
     public BakersOvenBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.BAKERS_OVEN, pos, state);
@@ -86,6 +91,59 @@ public class BakersOvenBlockEntity extends BlockEntity implements NamedScreenHan
         this.progress = 0;
     }
 
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction side) {
+        Direction localDir = this.getWorld().getBlockState(this.pos).get(BakersOven.FACING);
+
+        if(side == Direction.UP || side == Direction.DOWN) {
+            return false;
+        }
+
+        // Top insert 1
+        // Right insert 0
+        // Left insert 0
+        return switch (localDir) {
+            default ->
+                    side.getOpposite() == Direction.NORTH && slot == 0 ||
+                            side.getOpposite() == Direction.EAST && slot == 1 ||
+                            side.getOpposite() == Direction.WEST && slot == 1;
+            case EAST ->
+                    side.rotateYClockwise() == Direction.NORTH && slot == 0 ||
+                            side.rotateYClockwise() == Direction.EAST && slot == 1 ||
+                            side.getOpposite() == Direction.WEST && slot == 1;
+            case SOUTH ->
+                    side == Direction.NORTH && slot == 0 ||
+                            side == Direction.EAST && slot == 1 ||
+                            side.getOpposite() == Direction.WEST && slot == 1;
+            case WEST ->
+                    side.rotateYCounterclockwise() == Direction.NORTH && slot == 0 ||
+                            side.rotateYCounterclockwise() == Direction.EAST && slot == 1 ||
+                            side.getOpposite() == Direction.WEST && slot == 1;
+        };
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction side) {
+        Direction localDir = this.getWorld().getBlockState(this.pos).get(BakersOven.FACING);
+
+        if(side == Direction.UP) {
+            return false;
+        }
+
+        // Down extract 2
+        if(side == Direction.DOWN) {
+            return slot == 2;
+        }
+
+        // bottom extract 2
+        return switch (localDir) {
+            default -> side.getOpposite() == Direction.SOUTH && slot == 2;
+            case EAST -> side.rotateYClockwise() == Direction.SOUTH && slot == 2;
+            case SOUTH -> side == Direction.SOUTH && slot == 2;
+            case WEST -> side.rotateYCounterclockwise() == Direction.SOUTH && slot == 2;
+        };
+    }
+
     public static void tick(World world, BlockPos blockPos, BlockState state, BakersOvenBlockEntity entity) {
         if(world.isClient()) {
             return;
@@ -109,10 +167,13 @@ public class BakersOvenBlockEntity extends BlockEntity implements NamedScreenHan
             inventory.setStack(i, entity.getStack(i));
         }
 
+        Optional<BakersOvenRecipe> recipe = entity.getWorld().getRecipeManager()
+                .getFirstMatch(BakersOvenRecipe.Type.INSTANCE, inventory, entity.getWorld());
+
         if(hasRecipe(entity)) {
             entity.removeStack(1, 1);
 
-            entity.setStack(2, new ItemStack(ModItems.PLAIN_DONUT,
+            entity.setStack(2, new ItemStack(recipe.get().getOutput().getItem(),
                     entity.getStack(2).getCount() + 1));
 
             entity.resetProgress();
@@ -125,10 +186,11 @@ public class BakersOvenBlockEntity extends BlockEntity implements NamedScreenHan
             inventory.setStack(i, entity.getStack(i));
         }
 
-        boolean hasDoughInFirstSlot = entity.getStack(1).getItem() == ModItems.DOUGH;
+        Optional<BakersOvenRecipe> match = entity.getWorld().getRecipeManager()
+                .getFirstMatch(BakersOvenRecipe.Type.INSTANCE, inventory, entity.getWorld());
 
-        return hasDoughInFirstSlot && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, ModItems.PLAIN_DONUT);
+        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
+                && canInsertItemIntoOutputSlot(inventory, match.get().getOutput().getItem());
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleInventory inventory, Item output) {
