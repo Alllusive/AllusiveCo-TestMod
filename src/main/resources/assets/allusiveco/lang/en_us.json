@@ -5,10 +5,13 @@
   "item.allusiveco.donut_dough": "Donut Shaped Dough",
   "item.allusiveco.donut_cutter": "Donut Shaped Cutter",
   "item.allusiveco.dough": "Dough",
+  "item.allusiveco.furry_spawn_egg": "Furry Spawn Egg",
 
 
   "block.allusiveco.bakers_oven": "Bakers Oven",
   "block.allusiveco.strawberry_crop": "Strawberry Crop",
+
+  "entity.allusiveco.furry": "Furry",
 
 
   "itemGroup.allusiveco.allusiveco": "AllusiveCo"
