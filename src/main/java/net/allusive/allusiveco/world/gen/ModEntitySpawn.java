@@ -15,6 +15,6 @@ public class ModEntitySpawn {
                 ModEntities.FURRY, 80, 3, 3);
 
         SpawnRestriction.register(ModEntities.FURRY, SpawnRestriction.Location.ON_GROUND,
-                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnIgnoreLightLevel);
     }
 }

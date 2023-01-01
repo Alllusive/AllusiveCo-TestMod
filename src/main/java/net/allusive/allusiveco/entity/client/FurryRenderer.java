@@ -135,7 +135,7 @@ public class FurryRenderer extends GeoEntityRenderer<FurryEntity> {
     public RenderLayer getRenderType(FurryEntity animatable, float partialTicks, MatrixStack stack,
                                      VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder,
                                      int packedLightIn, Identifier textureLocation) {
-        stack.scale(2f, 2f, 2f);
+        stack.scale(1f, 1f, 1f);
 
         return super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
     }

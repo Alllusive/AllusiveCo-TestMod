@@ -3,7 +3,6 @@ package net.allusive.allusiveco.entity;
 import net.allusive.allusiveco.AllusiveCo;
 import net.allusive.allusiveco.entity.custom.FurryEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.fabricmc.fabric.impl.object.builder.FabricEntityType;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
